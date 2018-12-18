@@ -1,0 +1,1 @@
+latexmk -pdflua plan -auxdir=auxil -outdir=output -pvc

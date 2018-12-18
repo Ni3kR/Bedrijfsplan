@@ -1,0 +1,83 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thema}
+[2018/11/23 v0.01 LaTeX package for my own purpose]
+
+\RequirePackage{pdfpages}
+\RequirePackage[dutch]{babel}
+\RequirePackage[colorlinks=true,linkcolor=black]{hyperref}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{fontspec}
+
+%%%%%%%%%%%%%% THEME PART %%%%%%%%%%%%%%%%%%
+
+%%%%% Fonts
+
+% Suggestions:
+% Comfortaa, Merriweather, Coco Gothic, Open Sans, Montserrat, Raleway, Lato, Roboto, Quicksans
+
+\RequirePackage[usefilenames,% Important for XeLaTeX
+   RMstyle=Light,
+   SSstyle=Light,
+   TTstyle=Light
+   % DefaultFeatures={Ligatures=Common}
+   ]
+   {plex-otf} % Sets plex as body font
+
+\defaultfontfeatures{Ligatures=TeX}
+% Set sans serif font to Mohave, making it the headline font
+\setsansfont{Mohave}
+
+
+%%%%% Colors
+
+
+\definecolor{Main}{HTML}{000080}
+\definecolor{Secundary}{HTML}{0080cc}
+\definecolor{Tertiary}{HTML}{00ccff}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand\makeImgTitle{
+\begin{titlepage}
+  \includepdf{voorpagina/voorpagina.pdf}
+\end{titlepage}
+}
+
+% Define start of document
+\newcommand\Pre
+{
+  \pagenumbering{gobble}
+  \makeImgTitle
+  \clearpage
+  \tableofcontents
+  \clearpage
+  \pagenumbering{arabic}
+}
+
+\titlespacing*{\chapter}{0pt}{-100pt}{40pt}
+
+\titleformat{\chapter}[block]%
+{\color{Main}} {} {0pt}%
+{\parbox[b] {0.75\textwidth}
+  {\Huge\sffamily\scshape#1} \hfill \fontsize{78}{94}\selectfont\sffamily\scshape\thechapter}
+[
+\normalsize
+\vspace*{-20px}
+{\titlerule[1px]}
+]%
+
+
+% Give sections secundary color
+\titleformat{\section}
+{\color{Secundary}\sffamily\scshape\Large\bfseries}
+{\color{Secundary}\thesection\ #1}{1em}{}
+
+% Give subsections tertiary color
+\titleformat{\subsection}
+{\color{Tertiary}\sffamily\scshape\large\bfseries}
+{\color{Tertiary}\thesubsection\ #1}{1em}{}
+
+\endinput
